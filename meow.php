@@ -2,10 +2,6 @@
 
 // echo "meoowwwwwwwwwwwww :333333";
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
 $cuteness = (int)($_GET['cuteness'] ?? 1);
 
 $meows = ['meow', 'mrrp', 'mrow', 'purr', 'mreow'];
