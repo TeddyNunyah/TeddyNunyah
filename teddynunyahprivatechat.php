@@ -9,7 +9,8 @@
 
     $messages = $pdo->query('SELECT * FROM messages');
     foreach ($messages as $row) {
-        echo "<b>" . $row['userid'] . "</b>: " . $row['message'] . "<br/>";
+        $username = $pdo->query('SELECT username FROM users WHERE id = ' . $row['userid']);
+        echo "<b>" . $username . "</b>: " . $row['message'] . "<br/>";
     }
    ?> 
 </body>
