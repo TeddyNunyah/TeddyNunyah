@@ -4,7 +4,6 @@
     <title>Teddy Nunyah Private Chat</title>
 </head>
 <body>
-    hi
     <?php
     require_once 'dbconfig.php';
 
