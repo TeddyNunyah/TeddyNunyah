@@ -4,13 +4,14 @@
     <title>Teddy Nunyah Private Chat</title>
 </head>
 <body>
+    hi
     <?php
     require_once 'dbconfig.php';
 
-    $messages = $pdo->query('SELECT * FROM messages');
+    $messages = $pdo->query('SELECT * FROM messages JOIN users ON authorid = userid');
+
     foreach ($messages as $row) {
-        $username = $pdo->query('SELECT username FROM users WHERE id = ' . $row['userid']);
-        echo "<b>" . $username->fetch(PDO::FETCH_ASSOC)['username'] . "</b>: " . $row['message'] . "<br/>";
+        echo "<b>" . $row['username'] . "</b>: " . $row['message'] . "<br/>";
     }
    ?> 
 </body>
