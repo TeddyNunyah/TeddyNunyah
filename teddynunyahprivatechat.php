@@ -10,7 +10,7 @@
     $messages = $pdo->query('SELECT * FROM messages JOIN users ON authorid = userid');
 
     foreach ($messages as $row) {
-        echo "<b>" . $row['username'] . "</b>: " . $row['message'] . "<br/>";
+        echo "<b>" . htmlspecialchars($row['username']) . "</b>: " . htmlspecialchars($row['message']) . "<br/>";
     }
    ?> 
 </body>
