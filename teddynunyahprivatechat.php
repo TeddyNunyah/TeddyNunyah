@@ -2,16 +2,21 @@
 <html>
 <head>
     <title>Teddy Nunyah Private Chat</title>
+    <script>
+        const request = new Request("tnpcmessages")
+        let messages;
+        window.fetch(request)
+        .then((response) => {
+            return response.text()
+        })
+        .then((text) => {
+            document.getElementById("messages").innerHTML = text;
+        })
+    </script>
 </head>
 <body>
-    <?php
-    require_once 'dbconfig.php';
+    <div id="messages">
 
-    $messages = $pdo->query('SELECT * FROM messages JOIN users ON authorid = userid');
-
-    foreach ($messages as $row) {
-        echo "<b>" . htmlspecialchars($row['username']) . "</b>: " . htmlspecialchars($row['message']) . "<br/>";
-    }
-   ?> 
+    </div>
 </body>
 </html>
