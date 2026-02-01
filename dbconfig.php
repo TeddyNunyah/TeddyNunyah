@@ -1,4 +1,6 @@
 <?php
+require_once "dblogin.php";
+
 $host = "localhost";
 $db = "tnpc";
 $user = "tnpc";
