@@ -1,10 +1,6 @@
 <?php
 require_once "dblogin.php";
 
-$host = "localhost";
-$db = "tnpc";
-$user = "tnpc";
-$pass = "***REMOVED***";
 $charset = "utf8mb4";
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
