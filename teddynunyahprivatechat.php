@@ -12,7 +12,7 @@
                 .then((text) => {
                     if (messages.innerHTML !== text) {
                         messages.innerHTML = text;
-                        if (messages.scrollHeight - screen.height * 0.9 - messages.scrollTop < 0) {
+                        if (messages.scrollHeight - window.innerHeight * 0.9 - messages.scrollTop < 250) {
                             messages.scrollTop = messages.scrollHeight
                         } 
                     }
