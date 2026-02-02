@@ -5,13 +5,17 @@
     <title>Teddy Nunyah Private Chat</title>
     <script>
         function fetchMessages() {
-            const request = new Request("tnpcmessages")
-            window.fetch(request)
+            window.fetch("tnpcmessages")
                 .then((response) => {
                     return response.text()
                 })
                 .then((text) => {
-                    document.getElementById("messages").innerHTML = text;
+                    if (messages.innerHTML !== text) {
+                        messages.innerHTML = text;
+                        if (messages.scrollHeight - screen.height * 0.9 - messages.scrollTop < 0) {
+                            messages.scrollTop = messages.scrollHeight
+                        } 
+                    }
                 })
         };
         setInterval(fetchMessages, 500)
@@ -22,17 +26,14 @@
                 return
             }
             let userId = 1;
-            const request = new Request("sendmessage", {
-                method: "POST",
-                body: message,
-            })
-
-            window.fetch(request)
-            .then(() => {
-                fetchMessages()
-                inputBox.value = "";
-            })
-
+            inputBox.value = "";
+            window.fetch("sendmessage", {
+                    method: "POST",
+                    body: message
+                })
+                .then(() => {
+                    fetchMessages()
+                })
         }
 
         window.addEventListener("load", function() {
@@ -47,10 +48,10 @@
 </head>
 
 <body>
-    <div id="messages" style="overflow-y: auto; height: 75vh;">
+    <div id="messages" style="overflow-y: auto; height: 90vh; width:99vw; word-wrap: break-word">
 
     </div>
-    <input id="inputBox" type="text" autofocus=true placeholder="Send a message...">
+    <input id="inputBox" autofocus=true placeholder="Send a message...">
     <button id="send" onclick="sendMessage()">Send Message</button>
 </body>
 
