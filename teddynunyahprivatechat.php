@@ -3,21 +3,25 @@
 
 <head>
     <title>Teddy Nunyah Private Chat</title>
+    <link rel="stylesheet" href="teddynunyahprivatechat.css"/>
     <script>
-        function fetchMessages() {
+        function fetchMessages(jumpToBottom = false) {
             window.fetch("tnpcmessages")
                 .then((response) => {
                     return response.text()
                 })
                 .then((text) => {
-                    if (messages.innerHTML !== text) {
-                        messages.innerHTML = text;
-                        if (messages.scrollHeight - window.innerHeight * 0.9 - messages.scrollTop < 250) {
-                            messages.scrollTop = messages.scrollHeight
-                        } 
+                    if (messages.innerHTML == text) {
+                        return
+                    }
+                    messages.innerHTML = text
+                    if (messages.scrollHeight - window.innerHeight * 1.25 - messages.scrollTop < 0 || jumpToBottom) {
+                        messages.scrollTop = messages.scrollHeight
+                    } else {
+                        newMessages.style.display = "block"
                     }
                 })
-        };
+        }
         setInterval(fetchMessages, 500)
 
         function sendMessage() {
@@ -25,8 +29,8 @@
             if (!message) {
                 return
             }
-            let userId = 1;
-            inputBox.value = "";
+            let userId = 1
+            inputBox.value = ""
             window.fetch("sendmessage", {
                     method: "POST",
                     body: message
@@ -35,24 +39,31 @@
                     fetchMessages()
                 })
         }
-
-        window.addEventListener("load", function() {
-            inputBox.addEventListener("keydown", function(e) {
-                if (e.code === "Enter") {
-                    sendMessage()
-                }
-            })
-            fetchMessages()
-        })
     </script>
 </head>
 
 <body>
-    <div id="messages" style="overflow-y: auto; height: 90vh; width:99vw; word-wrap: break-word">
+    <div id="messages">
 
     </div>
+    <button id="newMessages" onclick="messages.scroll({top: messages.scrollHeight, behavior: 'smooth'})">↓ New Messages</button>
     <input id="inputBox" autofocus=true placeholder="Send a message...">
     <button id="send" onclick="sendMessage()">Send Message</button>
+
+    <script>
+        inputBox.addEventListener("keydown", (e) => {
+            if (e.code === "Enter") {
+                sendMessage()
+            }
+        })
+        messages.addEventListener("scroll", () => {
+            if (messages.scrollHeight - window.innerHeight * 0.9 - messages.scrollTop <= 10) {
+                newMessages.style.display = "none"
+            }
+        })
+
+        fetchMessages(true)
+    </script>
 </body>
 
 </html>

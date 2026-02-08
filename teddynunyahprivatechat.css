@@ -1,0 +1,17 @@
+#newMessages {
+    position: absolute;
+    left: 5vw;
+    bottom: 11vh;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+#messages {
+    overflow-y: auto;
+    height: 90vh;
+    width: 99vw;
+    word-wrap: break-word;
+}
