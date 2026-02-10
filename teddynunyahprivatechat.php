@@ -3,7 +3,7 @@
 
 <head>
     <title>Teddy Nunyah Private Chat</title>
-    <link rel="stylesheet" href="teddynunyahprivatechat.css"/>
+    <link rel="stylesheet" href="teddynunyahprivatechat.css" />
     <script>
         function fetchMessages(jumpToBottom = false) {
             window.fetch("tnpcmessages")
@@ -15,7 +15,7 @@
                         return
                     }
                     messages.innerHTML = text
-                    if (messages.scrollHeight - window.innerHeight * 1.25 - messages.scrollTop < 0 || jumpToBottom) {
+                    if (messages.scrollHeight - messages.clientHeight * 1.25 - messages.scrollTop < 0 || jumpToBottom) {
                         messages.scrollTop = messages.scrollHeight
                     } else {
                         newMessages.style.display = "block"
@@ -57,7 +57,7 @@
             }
         })
         messages.addEventListener("scroll", () => {
-            if (messages.scrollHeight - window.innerHeight * 0.9 - messages.scrollTop <= 10) {
+            if (messages.scrollHeight - messages.clientHeight - messages.scrollTop <= 10) {
                 newMessages.style.display = "none"
             }
         })
